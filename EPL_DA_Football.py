@@ -57,3 +57,12 @@ epl_df['Position'].unique()
 #Total FW players
 epl_df[epl_df['Position'] == 'FW']
 # %%
+
+#Players from different nations
+np.size((epl_df['Nationality'].unique()))
+# %%
+
+#Most players from which countries
+nationality = epl_df.groupby('Nationality').size().sort_values(ascending=False)
+nationality.head(10).plot(kind='bar', figsize=(12,6), color=sns.color_palette('magma'))
+# %%
