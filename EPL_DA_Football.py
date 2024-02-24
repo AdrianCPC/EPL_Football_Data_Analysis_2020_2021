@@ -94,3 +94,27 @@ players_under_20 = epl_df[epl_df['Age'] < 20]
 players_under_20['Club'].value_counts().plot(kind='bar', color= sns.color_palette('cubehelix'))
 
 # %%
+
+#Under 20 players in ManU
+players_under_20[players_under_20['Club'] == 'Manchester United']
+
+# %%
+
+#Under 20 players in Chelsea
+players_under_20[players_under_20['Club'] == 'Chelsea']
+
+# %%
+
+#Average age of players in each club
+plt.figure(figsize=(12,6))
+sns.boxplot(x='Club', y='Age', data=epl_df)
+plt.xticks(rotation=90)
+plt.show()
+
+
+# %%
+#Average age from all clubs
+num_player = epl_df.groupby('Club').size()
+data = (epl_df.groupby('Club')['Age'].sum())/num_player
+data.sort_values(ascending=False)
+# %%
