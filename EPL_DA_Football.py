@@ -118,3 +118,36 @@ num_player = epl_df.groupby('Club').size()
 data = (epl_df.groupby('Club')['Age'].sum())/num_player
 data.sort_values(ascending=False)
 # %%
+
+#Total assists from  each club
+Assits_by_clubs = pd.DataFrame(epl_df.groupby('Club', as_index=False)['Assists'].sum())
+sns.set_theme(style='whitegrid',color_codes=True)
+ax=sns.barplot(x='Club', y='Assists',data=Assits_by_clubs.sort_values(by='Assists'),palette='Set2')
+ax.set_xlabel('Club',fontsize=30)
+ax.set_ylabel('Assists', fontsize=20)
+plt.xticks(rotation=75)
+plt.rcParams['figure.figsize'] = (20,8)
+plt.title('Plot of Club vs Total Assits', fontsize=20)
+plt.show()
+# %%
+
+#Top 10 Assists
+top_10_assists = epl_df[['Name','Club','Assists','Matches']].nlargest(n=10,columns='Assists')
+top_10_assists
+# %%
+
+#Total Goals each Club
+Goals_by_clubs = pd.DataFrame(epl_df.groupby('Club', as_index=False)['Goals'].sum())
+sns.set_theme(style='whitegrid',color_codes=True)
+ax=sns.barplot(x='Club',y='Goals',data=Goals_by_clubs.sort_values(by='Goals'),palette='rocket')
+ax.set_xlabel('Club',fontsize=30)
+ax.set_ylabel('Goals',fontsize=20)
+plt.xticks(rotation=75)
+plt.rcParams['figure.figsize'] = (20,8)
+plt.title('Plot of Clubs vs Total Goals', fontsize=20)
+# %%
+
+#Most goals by players
+top_10_goals = epl_df[['Name','Club','Goals','Matches']].nlargest(n=10,columns='Goals')
+top_10_goals
+# %%
