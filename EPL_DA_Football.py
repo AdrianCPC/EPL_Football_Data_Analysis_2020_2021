@@ -151,3 +151,29 @@ plt.title('Plot of Clubs vs Total Goals', fontsize=20)
 top_10_goals = epl_df[['Name','Club','Goals','Matches']].nlargest(n=10,columns='Goals')
 top_10_goals
 # %%
+
+#Goals per match
+top_10_goals_per_match = epl_df[['Name','GoalsPerMatch','Matches','Goals']].nlargest(n=10,columns='GoalsPerMatch')
+top_10_goals_per_match
+
+# %%
+
+#Pie Chart - Goals with assist and without assist
+plt.figure(figsize=(14,7))
+assists = epl_df['Assists'].sum()
+data = [Total_Goals - assists,assists]
+labels = ['Goals without assists', 'Goals with assists']
+color = sns.color_palette('Set1')
+plt.pie(data,labels=labels,colors=color,autopct='%.0f%%')
+plt.show()
+# %%
+
+#Top 10 players with most yellow cards
+epl_yellow = epl_df.sort_values(by='Yellow_Cards', ascending=False)[:10]
+plt.figure(figsize=(20,6))
+plt.title('Players with the most yellow cards')
+cards_yellow=sns.barplot(x=epl_yellow['Name'],y=epl_yellow['Yellow_Cards'], label='Players',color='yellow')
+plt.ylabel('Number of Yellow Cards')
+cards_yellow.set_xticklabels(cards_yellow.get_xticklabels(),rotation=45)
+cards_yellow
+# %%
